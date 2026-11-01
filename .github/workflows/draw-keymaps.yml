@@ -1,0 +1,35 @@
+
+name: Draw keyboard keymaps
+
+on:
+  workflow_dispatch:
+
+  push:
+    paths:
+      - 'config/*.keymap'
+      - 'config/*.dtsi'
+      - 'miryoku/**'
+      - 'keymap_drawer.config.yaml'
+      - '.github/workflows/draw-keymaps.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  draw:
+    uses: caksoylar/keymap-drawer/.github/workflows/draw-zmk.yml@v0.22.0
+
+    permissions:
+      contents: read
+
+    with:
+      keymap_patterns: "config/totem.keymap"
+      output_folder: "keymap-drawer"
+
+      # This repository has no config/west.yml.
+      west_config_path: ""
+
+      # Upload results as an artifact instead of
+      # automatically committing generated files.
+      destination: artifact
+      artifact_name: totem-keymap-diagrams
