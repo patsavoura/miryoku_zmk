@@ -106,9 +106,9 @@ jobs:
           run_name="miryoku_zmk"
           if [ -n "${{ matrix.shield }}" -a "${{ matrix.shield }}" != 'default' ]
           then
-            run_name="$run_name ${{ matrix.shield }}"
+            run_name="$run_name $(echo '${{ matrix.board }}' | tr '/' '-')"
           fi
-          run_name="$run_name ${{ matrix.board }}"
+          run_name="$run_name $(echo '${{ matrix.board }}' | tr '/' '-')"
 
           hash_length=8
 
